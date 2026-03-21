@@ -1,0 +1,187 @@
+
+<style>
+  .tree { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--color-text-primary); padding: 0; }
+  .section { border-radius: var(--border-radius-lg); padding: 16px 20px; margin-bottom: 14px; }
+  .s-fe { background: #E6F1FB; border-left: 3px solid #378ADD; }
+  .s-be { background: #EAF3DE; border-left: 3px solid #639922; }
+  .s-shared { background: #EEEDFE; border-left: 3px solid #7F77DD; }
+  @media (prefers-color-scheme: dark) {
+    .s-fe { background: #0C447C22; border-left: 3px solid #85B7EB; }
+    .s-be { background: #27500A22; border-left: 3px solid #97C459; }
+    .s-shared { background: #3C348922; border-left: 3px solid #AFA9EC; }
+  }
+  .tag { display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .t-u  { background:#B5D4F4; color:#042C53; }
+  .t-s  { background:#C0DD97; color:#173404; }
+  .t-uj { background:#FAC775; color:#412402; }
+  .t-ak { background:#F4C0D1; color:#4B1528; }
+  .t-sh { background:#CECBF6; color:#26215C; }
+  @media (prefers-color-scheme: dark) {
+    .t-u  { background:#0C447C; color:#B5D4F4; }
+    .t-s  { background:#27500A; color:#C0DD97; }
+    .t-uj { background:#633806; color:#FAC775; }
+    .t-ak { background:#72243E; color:#F4C0D1; }
+    .t-sh { background:#3C3489; color:#CECBF6; }
+  }
+  .dir { color: var(--color-text-secondary); font-weight: 500; }
+  .file { color: var(--color-text-primary); }
+  .comment { color: var(--color-text-tertiary); font-size: 11px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; font-size: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  h3 { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin: 0 0 10px; letter-spacing: .04em; text-transform: uppercase; }
+</style>
+<div style="padding: 4px 0">
+  <div class="legend">
+    <span class="legend-item"><span class="tag t-u">Udit</span> UI/Layout</span>
+    <span class="legend-item"><span class="tag t-s">Shorya</span> Editor/WS-client</span>
+    <span class="legend-item"><span class="tag t-uj">Ujjwal</span> Auth/REST APIs</span>
+    <span class="legend-item"><span class="tag t-ak">Akshat</span> WS-server/OT</span>
+    <span class="legend-item"><span class="tag t-sh">Shared</span> Config/Setup</span>
+  </div>
+
+  <!-- FRONTEND -->
+  <div class="section s-fe tree">
+    <h3>Frontend — React (Vite)</h3>
+<pre style="margin:0;white-space:pre-wrap;font-family:var(--font-mono);font-size:12.5px;line-height:1.75;background:transparent;color:inherit">
+collaborative-editor/
+└── frontend/
+    ├── index.html
+    ├── vite.config.js               <span class="tag t-sh">Shared</span>
+    ├── package.json                 <span class="tag t-sh">Shared</span>
+    ├── tailwind.config.js           <span class="tag t-u">Udit</span>
+    └── src/
+        ├── main.jsx                 <span class="tag t-sh">Shared</span>
+        ├── App.jsx                  <span class="tag t-sh">Shared</span> <span class="comment">← routes go here</span>
+        │
+        ├── assets/                  <span class="tag t-u">Udit</span>
+        │   └── logo.svg
+        │
+        ├── styles/                  <span class="tag t-u">Udit</span>
+        │   └── globals.css
+        │
+        ├── pages/                   <span class="tag t-u">Udit</span>
+        │   ├── LoginPage.jsx
+        │   ├── SignupPage.jsx
+        │   ├── DashboardPage.jsx    <span class="comment">← list of rooms</span>
+        │   └── WorkspacePage.jsx    <span class="comment">← main editor screen</span>
+        │
+        ├── components/
+        │   ├── auth/                <span class="tag t-u">Udit</span>
+        │   │   ├── LoginForm.jsx
+        │   │   └── SignupForm.jsx
+        │   │
+        │   ├── dashboard/           <span class="tag t-u">Udit</span>
+        │   │   ├── RoomCard.jsx
+        │   │   └── CreateRoomModal.jsx
+        │   │
+        │   ├── layout/              <span class="tag t-u">Udit</span>
+        │   │   ├── Navbar.jsx
+        │   │   ├── Sidebar.jsx
+        │   │   └── UserAvatar.jsx
+        │   │
+        │   ├── editor/              <span class="tag t-s">Shorya</span>
+        │   │   ├── MonacoEditor.jsx  <span class="comment">← Monaco wrapper component</span>
+        │   │   ├── EditorToolbar.jsx <span class="comment">← undo/redo/download</span>
+        │   │   └── CursorLabel.jsx   <span class="comment">← name+color above cursor</span>
+        │   │
+        │   └── filetree/            <span class="tag t-s">Shorya</span>
+        │       ├── FileTree.jsx
+        │       ├── FileNode.jsx
+        │       └── FileContextMenu.jsx <span class="comment">← rename/delete menu</span>
+        │
+        ├── hooks/
+        │   ├── useAuth.js           <span class="tag t-u">Udit</span>
+        │   ├── useWebSocket.js      <span class="tag t-s">Shorya</span> <span class="comment">← WS connection hook</span>
+        │   └── useCollaboration.js  <span class="tag t-s">Shorya</span> <span class="comment">← OT client logic</span>
+        │
+        ├── store/                   <span class="tag t-s">Shorya</span>
+        │   ├── index.js             <span class="comment">← Zustand or Redux store</span>
+        │   ├── authSlice.js
+        │   ├── roomSlice.js
+        │   └── editorSlice.js
+        │
+        ├── services/
+        │   ├── api.js               <span class="tag t-uj">Ujjwal</span> <span class="comment">← Axios base instance</span>
+        │   ├── authService.js       <span class="tag t-uj">Ujjwal</span>
+        │   └── roomService.js       <span class="tag t-uj">Ujjwal</span>
+        │
+        └── utils/
+            ├── constants.js         <span class="tag t-sh">Shared</span>
+            └── helpers.js           <span class="tag t-sh">Shared</span>
+</pre>
+  </div>
+
+  <!-- BACKEND -->
+  <div class="section s-be tree">
+    <h3>Backend — Spring Boot (Java)</h3>
+<pre style="margin:0;white-space:pre-wrap;font-family:var(--font-mono);font-size:12.5px;line-height:1.75;background:transparent;color:inherit">
+└── backend/
+    ├── pom.xml                      <span class="tag t-sh">Shared</span>
+    └── src/main/
+        ├── java/com/collabedit/
+        │   │
+        │   ├── CollabeditApplication.java  <span class="tag t-sh">Shared</span>
+        │   │
+        │   ├── config/              <span class="tag t-uj">Ujjwal</span>
+        │   │   ├── SecurityConfig.java     <span class="comment">← Spring Security + JWT</span>
+        │   │   ├── WebSocketConfig.java    <span class="tag t-ak">Akshat</span>
+        │   │   └── CorsConfig.java
+        │   │
+        │   ├── auth/                <span class="tag t-uj">Ujjwal</span>
+        │   │   ├── AuthController.java     <span class="comment">← /api/auth/**</span>
+        │   │   ├── AuthService.java
+        │   │   ├── JwtUtil.java
+        │   │   ├── JwtFilter.java
+        │   │   └── dto/
+        │   │       ├── LoginRequest.java
+        │   │       ├── SignupRequest.java
+        │   │       └── AuthResponse.java
+        │   │
+        │   ├── user/                <span class="tag t-uj">Ujjwal</span>
+        │   │   ├── User.java               <span class="comment">← JPA entity</span>
+        │   │   ├── UserRepository.java
+        │   │   ├── UserService.java
+        │   │   └── UserController.java     <span class="comment">← /api/users/**</span>
+        │   │
+        │   ├── room/                <span class="tag t-uj">Ujjwal</span>
+        │   │   ├── Room.java               <span class="comment">← JPA entity</span>
+        │   │   ├── RoomRepository.java
+        │   │   ├── RoomService.java
+        │   │   ├── RoomController.java     <span class="comment">← /api/rooms/**</span>
+        │   │   └── dto/
+        │   │       ├── CreateRoomRequest.java
+        │   │       └── RoomResponse.java
+        │   │
+        │   ├── file/                <span class="tag t-uj">Ujjwal</span>
+        │   │   ├── CodeFile.java
+        │   │   ├── CodeFileRepository.java
+        │   │   ├── CodeFileService.java
+        │   │   └── CodeFileController.java <span class="comment">← /api/files/**</span>
+        │   │
+        │   └── websocket/           <span class="tag t-ak">Akshat</span>
+        │       ├── EditorWebSocketHandler.java  <span class="comment">← raw WS handler</span>
+        │       ├── SessionManager.java          <span class="comment">← who is in which room</span>
+        │       ├── RoomRegistry.java            <span class="comment">← active rooms in memory</span>
+        │       ├── OTEngine.java                <span class="comment">← operational transform</span>
+        │       └── message/
+        │           ├── IncomingMessage.java     <span class="comment">← client → server</span>
+        │           └── OutgoingMessage.java     <span class="comment">← server → client</span>
+        │
+        └── resources/
+            ├── application.properties          <span class="tag t-sh">Shared</span>
+            └── application-dev.properties
+</pre>
+  </div>
+
+  <!-- DB Schema hint -->
+  <div class="section s-shared tree">
+    <h3>Database (PostgreSQL) — Ujjwal</h3>
+<pre style="margin:0;white-space:pre-wrap;font-family:var(--font-mono);font-size:12.5px;line-height:1.75;background:transparent;color:inherit">
+tables:
+  users       (id, username, email, password_hash, created_at)
+  rooms       (id, name, invite_code [UUID], owner_id → users, created_at)
+  room_members(room_id → rooms, user_id → users, joined_at)
+  code_files  (id, room_id → rooms, filename, content TEXT, updated_at)
+</pre>
+  </div>
+</div>
